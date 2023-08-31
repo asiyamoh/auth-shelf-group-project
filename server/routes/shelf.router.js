@@ -88,6 +88,16 @@ router.get('/count', (req, res) => {
  */
 router.get('/:id', (req, res) => {
   // endpoint functionality
+  console.log(req.params)
+  let id = req.params.id;
+  let querytext = `SELECT * FROM item WHERE "id" = ${id};`
+  pool.query(querytext)
+  .then((response) => {
+    res.send(response.rows)
+  })
+  .catch ((error) => {
+    res.sendStatus(500)
+  });
 });
 
 module.exports = router;
