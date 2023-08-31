@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 function ShelfPage() {
 
   const dispatch = useDispatch();
   const shelf = useSelector(store => store.shelf);
+      const [newItem, setNewItem] = useState('')
 
   useEffect(() => {
     dispatch({ type: 'FETCH_SHELF' });
   }, [dispatch]);
+
+  const handleAddNewItem = () => {
+    dispatch({ type: 'ADD_NEW_ITEM', payload: newItem})
+  }
 
   return (
     <div className="container">
