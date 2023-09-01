@@ -36,7 +36,7 @@ function ShelfPage() {
                 type="text" 
                 placeholder='Enter Item Name'
                 value={newItemName}
-                onChange={(event) => setNewItem(event.target.value)}
+                onChange={(event) => setNewItemName(event.target.value)}
                 />
                 <input 
                 type="text" 
