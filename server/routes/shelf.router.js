@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   console.log(req.body)
   if (req.isAuthenticated()) {
   let querytext = `SELECT * FROM item`
-  pool.query(querytext, [req.user.id])
+  pool.query(querytext)
   .then((response) => {
     res.send(response.rows)
   })
