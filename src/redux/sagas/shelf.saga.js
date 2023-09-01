@@ -13,8 +13,8 @@ function* fetchShelf() {
             payload: shelf.data
         });
 
-    } catch {
-        console.log('get all error');
+    } catch (error){
+        console.log('get all error', error);
     }
         
 }

@@ -1,21 +1,65 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 function ShelfPage() {
 
+  const [newItemName, setNewItemName] = useState("");
+  const [newItemUrl, setNewItemUrl] = useState("");
+
   const dispatch = useDispatch();
-  const shelf = useSelector(store => store.shelf);
+  const shelf = useSelector(store => store.shelfReducer);
+  console.log('heressss', shelf)
 
   useEffect(() => {
     dispatch({ type: 'FETCH_SHELF' });
   }, [dispatch]);
 
+
+  const handleAdd = (event) => {
+    event.preventDefault();
+
+    dispatch({
+        type: 'ADD_ITEM',
+        payload: {description: newItemName,
+                  image_url: newItemUrl
+                }
+    })
+  }
+
   return (
     <div className="container">
+      <div>
+            <form onSubmit={handleAdd}>
+                <input 
+                type="text" 
+                placeholder='Enter Item Name'
+                value={newItemName}
+                onChange={(event) => setNewItem(event.target.value)}
+                />
+                <input 
+                type="text" 
+                placeholder='Enter Image URL'
+                value={newItemUrl}
+                onChange={(event) => setNewItemUrl(event.target.value)}
+                />
+                <button type="submit">ADD</button>
+            </form>
+      </div>
       <h2>Shelf</h2>
-      <p>All of the available items can be seen here.</p>
+      {shelf.map(item => {
+        return (
+          <div key = {item.id}>
+            <p>{item.description}</p>
+            <img src={item.image_url} height='200px'></img>
+            <div>
+              <button>DELETE</button>
+            </div>
+          </div>
+        )
+      })}
+
     </div>
   );
 }
