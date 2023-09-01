@@ -7,12 +7,10 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware');
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-
   console.log(req.isAuthenticated())
-  console.log(req.body)
   if (req.isAuthenticated()) {
   let querytext = `SELECT * FROM item`
-  pool.query(querytext, [req.user.id])
+  pool.query(querytext)
   .then((response) => {
     res.send(response.rows)
   })
@@ -32,7 +30,6 @@ router.post('/', (req, res) => {
   // endpoint functionality
   console.log("login:", req.isAuthenticated())
   if (req.isAuthenticated()) {
-  console.log('req body:', req.body)
   let queryText = `INSERT INTO "item"("description" , "image_url")
   VALUES($1, $2);`
   let queryParams = [req.body.description, req.body.image_url];
