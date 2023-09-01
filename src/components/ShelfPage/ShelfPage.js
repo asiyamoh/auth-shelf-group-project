@@ -1,7 +1,7 @@
+
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 function ShelfPage() {
   const [newItemName, setNewItemName] = useState("");
@@ -27,21 +27,22 @@ function ShelfPage() {
   return (
     <div className="container">
       <div>
-        <form onSubmit={handleAdd}>
-          <input
-            type="text"
-            placeholder="Enter Item Name"
-            value={newItemName}
-            onChange={(event) => setNewItemName(event.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Enter Image URL"
-            value={newItemUrl}
-            onChange={(event) => setNewItemUrl(event.target.value)}
-          />
-          <button type="submit">ADD</button>
-        </form>
+            <form onSubmit={handleAdd}>
+                <input 
+                type="text" 
+                placeholder='Enter Item Name'
+                value={newItemName}
+                onChange={(event) => setNewItemName(event.target.value)}
+                />
+                <input 
+                type="text" 
+                placeholder='Enter Image URL'
+                value={newItemUrl}
+                onChange={(event) => setNewItemUrl(event.target.value)}
+                />
+                <button type="submit">ADD</button>
+            </form>
+
       </div>
       <h2>Shelf</h2>
       {shelf.map((item) => {
