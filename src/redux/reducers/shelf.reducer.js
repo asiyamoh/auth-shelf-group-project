@@ -8,7 +8,7 @@ const shelfReducer = (state = [], action) => {
         return state;
     }
   };
-  
+
   // shelf will be on the redux state at:
   // state.shelf
   export default shelfReducer;

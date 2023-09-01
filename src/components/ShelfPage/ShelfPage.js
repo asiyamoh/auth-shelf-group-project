@@ -1,31 +1,28 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
+import React from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function ShelfPage() {
-
   const [newItemName, setNewItemName] = useState("");
   const [newItemUrl, setNewItemUrl] = useState("");
 
   const dispatch = useDispatch();
-  const shelf = useSelector(store => store.shelfReducer);
-  console.log('heressss', shelf)
+  const shelf = useSelector((store) => store.shelfReducer);
+  console.log("heressss", shelf);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_SHELF' });
+    dispatch({ type: "FETCH_SHELF" });
   }, [dispatch]);
-
 
   const handleAdd = (event) => {
     event.preventDefault();
 
     dispatch({
-        type: 'ADD_ITEM',
-        payload: {description: newItemName,
-                  image_url: newItemUrl
-                }
-    })
-  }
+      type: "ADD_ITEM",
+      payload: { description: newItemName, image_url: newItemUrl },
+    });
+  };
 
   return (
     <div className="container">
@@ -45,20 +42,22 @@ function ShelfPage() {
                 />
                 <button type="submit">ADD</button>
             </form>
+
       </div>
       <h2>Shelf</h2>
-      {shelf.map(item => {
+      {shelf.map((item) => {
         return (
-          <div key = {item.id}>
+          <div key={item.id}>
             <p>{item.description}</p>
-            <img src={item.image_url} height='200px'></img>
+            <img src={item.image_url} height="200px"></img>
             <div>
-              <button>DELETE</button>
+              <button onClick={() => dispatch({ type: "DELETE_ITEM", payload: item.id })}>
+                Delete
+              </button>
             </div>
           </div>
-        )
+        );
       })}
-
     </div>
   );
 }
