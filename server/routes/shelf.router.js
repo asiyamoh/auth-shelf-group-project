@@ -1,19 +1,26 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {rejectUnauthenticated} = require('../modules/authentication-middleware');
 
 /**
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-  let querytext = `SELECT * FROM item;`
-  pool.query(querytext)
+  console.log(req.isAuthenticated())
+  console.log(req.body)
+  if (req.isAuthenticated()) {
+  let querytext = `SELECT * FROM item`
+  pool.query(querytext, [req.user.id])
   .then((response) => {
     res.send(response.rows)
   })
   .catch ((error) => {
     res.sendStatus(500)
   });
+} else {
+  res.sendStatus(403);
+}
 });
 
 /**
