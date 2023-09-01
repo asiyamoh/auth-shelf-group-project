@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 function ShelfPage() {
 
@@ -36,7 +35,7 @@ function ShelfPage() {
                 type="text" 
                 placeholder='Enter Item Name'
                 value={newItemName}
-                onChange={(event) => setNewItem(event.target.value)}
+                onChange={(event) => setNewItemName(event.target.value)}
                 />
                 <input 
                 type="text" 
