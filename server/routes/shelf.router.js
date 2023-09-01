@@ -21,9 +21,9 @@ router.get('/', (req, res) => {
   .catch ((error) => {
     res.sendStatus(500)
   });
-// } else {
-//   res.sendStatus(403);
-// }
+} else {
+  res.sendStatus(403);
+}
 
 });
 
@@ -46,8 +46,11 @@ router.post('/', (req, res) => {
     }).catch((error) => {
       res.sendStatus(500)
     })
+  } else {
+    res.sendStatus(403);
   }
-);
+  
+  });
 
 /**
  * Delete an item if it's something the logged in user added
